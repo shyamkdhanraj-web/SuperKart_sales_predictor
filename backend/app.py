@@ -18,19 +18,21 @@ def home():
 # Define an endpoint for single property prediction (POST request)
 @sales_predictor_api.post('/v1/predict')
 def predict_sales():
+    # Get the JSON data from the request body
+    request_data = request.get_json()
 
     # Extract relevant features from the JSON data
     sample = {
-    "Product_Weight": property_data["Product_Weight"],
-    "Product_Sugar_Content": property_data["Product_Sugar_Content"],
-    "Product_Allocated_Area": property_data["Product_Allocated_Area"],
-    "Product_MRP": property_data["Product_MRP"],
-    "Store_Size": property_data["Store_Size"],
-    "Store_Location_City_Type": property_data["Store_Location_City_Type"],
-    "Store_Type": property_data["Store_Type"],
-    "Product_Prefix": property_data["Product_Id_char"],
-    "Store_Age": property_data["Store_Age_Years"],
-    "Product_Type_Category": property_data["Product_Type_Category"]
+    "Product_Weight": request_data["Product_Weight"],
+    "Product_Sugar_Content": request_data["Product_Sugar_Content"],
+    "Product_Allocated_Area": request_data["Product_Allocated_Area"],
+    "Product_MRP": request_data["Product_MRP"],
+    "Store_Size": request_data["Store_Size"],
+    "Store_Location_City_Type": request_data["Store_Location_City_Type"],
+    "Store_Type": request_data["Store_Type"],
+    "Product_Prefix": request_data["Product_Id_char"],
+    "Store_Age": request_data["Store_Age_Years"],
+    "Product_Type_Category": request_data["Product_Type_Category"]
     }
     # Convert the extracted data into a Pandas DataFrame
     input_data = pd.DataFrame([sample])
